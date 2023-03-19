@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/RL"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/btn5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/leftBorder"
+        android:layout_width="8dp"
+        android:layout_height="330dp"
+        android:layout_toLeftOf="@id/RL"
+        android:layout_marginRight="-14dp"
+        android:background="@color/Border"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:id="@+id/rightBorder"
+        android:layout_width="8dp"
+        android:layout_height="330dp"
+        android:layout_toRightOf="@id/RL"
+        android:layout_marginLeft="-14dp"
+        android:background="@color/Border"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:id="@+id/topBorder"
+        android:layout_width="330dp"
+        android:layout_height="8dp"
+        android:layout_above="@id/RL"
+        android:background="@color/Border"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-14dp"
+        android:layout_centerInParent="true"/>
+
+    <RelativeLayout
+        android:id="@+id/bottomBorder"
+        android:layout_width="330dp"
+        android:layout_height="8dp"
+        android:layout_below="@id/RL"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="4dp"
+        android:background="@color/Border" />
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/topBorder"
+        android:layout_toLeftOf="@id/leftBorder">
+
+        <ImageView
+            android:id="@+id/btnn1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/topBorder"
+        android:layout_toLeftOf="@id/rightBorder">
+
+        <ImageView
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/topBorder"
+        android:layout_toRightOf="@id/rightBorder">
+
+        <ImageView
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="2dp"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/bottomBorder"
+        android:layout_toLeftOf="@id/leftBorder">
+
+        <ImageView
+            android:id="@+id/btn4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="2dp"
+        android:layout_centerInParent="true"
+        android:layout_above="@id/bottomBorder"
+        android:layout_toRightOf="@id/rightBorder">
+
+        <ImageView
+            android:id="@+id/btn6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/bottomBorder"
+        android:layout_toRightOf="@id/rightBorder">
+
+        <ImageView
+            android:id="@+id/btn9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/bottomBorder"
+        android:layout_toRightOf="@id/leftBorder">
+
+        <ImageView
+            android:id="@+id/btn8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/bottomBorder"
+        android:layout_toLeftOf="@id/leftBorder">
+
+        <ImageView
+            android:id="@+id/btn7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+</RelativeLayout>
