@@ -23,11 +23,10 @@
         android:id="@+id/leftBorder"
         android:layout_width="8dp"
         android:layout_height="330dp"
-        android:layout_toLeftOf="@id/RL"
+        android:layout_centerInParent="true"
         android:layout_marginRight="-14dp"
-        android:background="@color/Border"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"/>
+        android:layout_toLeftOf="@id/RL"
+        android:background="@drawable/sep_vertical" />
 
     <RelativeLayout
         android:id="@+id/rightBorder"
@@ -35,7 +34,7 @@
         android:layout_height="330dp"
         android:layout_toRightOf="@id/RL"
         android:layout_marginLeft="-14dp"
-        android:background="@color/Border"
+        android:background="@drawable/sep_vertical"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"/>
 
@@ -44,10 +43,9 @@
         android:layout_width="330dp"
         android:layout_height="8dp"
         android:layout_above="@id/RL"
-        android:background="@color/Border"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_marginBottom="-14dp"
-        android:layout_centerInParent="true"/>
+        android:background="@drawable/sep_horizontal" />
 
     <RelativeLayout
         android:id="@+id/bottomBorder"
@@ -56,7 +54,7 @@
         android:layout_below="@id/RL"
         android:layout_centerInParent="true"
         android:layout_marginTop="4dp"
-        android:background="@color/Border" />
+        android:background="@drawable/sep_horizontal" />
 
     <RelativeLayout
         android:layout_width="90dp"

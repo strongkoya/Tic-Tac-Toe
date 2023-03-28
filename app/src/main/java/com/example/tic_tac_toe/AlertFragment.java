@@ -26,11 +26,11 @@ import androidx.fragment.app.DialogFragment;
 
 public class AlertFragment extends DialogFragment {
 
-    private String mContentText;
-    private int mAnimationType;
+    private final String mContentText;
+    private final int mAnimationType;
     private DialogInterface.OnClickListener positiveButtonListener;
     private String text;
-     private MyCanvasView myCanvasView;
+    private MyCanvasView myCanvasView;
 
     public AlertFragment(String contentText, int animationType) {
         mContentText = contentText;
@@ -40,7 +40,7 @@ public class AlertFragment extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       // Créer une instance de la vue du fragment
+        // Créer une instance de la vue du fragment
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_alert, null);
 
         /*View view = inflater.inflate(R.layout.fragment_alert, container, false);*//*
@@ -65,6 +65,7 @@ public class AlertFragment extends DialogFragment {
 
         return view;
     }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -78,7 +79,6 @@ public class AlertFragment extends DialogFragment {
 
         Animation animation = getAnimation(mAnimationType);
         textView.startAnimation(animation);
-
 
 
         myCanvasView = view.findViewById(R.id.MyCanvasView);
@@ -106,7 +106,6 @@ public class AlertFragment extends DialogFragment {
     }
 
 
-
     private Animation getAnimation(int animationType) {
         switch (animationType) {
             case 1:
@@ -119,6 +118,7 @@ public class AlertFragment extends DialogFragment {
                 return null;
         }
     }
+
     public void setPositiveButton(DialogInterface.OnClickListener listener) {
 
         positiveButtonListener = listener;

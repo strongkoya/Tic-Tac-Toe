@@ -17,7 +17,7 @@ import java.util.Random;
 public class MyCanvasView extends View {
 
     private Paint crossPaint;
-    private Paint circlePaint1,circlePaint2;
+    private Paint circlePaint1, circlePaint2;
     private int size;
     private Point center;
     private boolean isAnimating;
@@ -61,14 +61,14 @@ public class MyCanvasView extends View {
         circlePaint1 = new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint1.setColor(Color.TRANSPARENT);
         circlePaint1.setStyle(Paint.Style.FILL);
-       // canvas.drawCircle(50, 50, 40, circlePaint);
+        // canvas.drawCircle(50, 50, 40, circlePaint);
 
         // Dessiner un cercle noir autour du cercle blanc pour créer le contour
         circlePaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint2.setColor(Color.WHITE);
         circlePaint2.setStyle(Paint.Style.STROKE);
         circlePaint2.setStrokeWidth(30);
-      //  canvas.drawCircle(50, 50, 40, circlePaint);
+        //  canvas.drawCircle(50, 50, 40, circlePaint);
 
         size = 200;
         center = new Point(0, 0);
@@ -110,11 +110,11 @@ public class MyCanvasView extends View {
                 public void run() {
                     int width = getWidth();
                     int height = getHeight();
-                    if (x4 + directionX * 10 > width  || x2 + directionX * 10 > width  ||
+                    if (x4 + directionX * 10 > width || x2 + directionX * 10 > width ||
                             x1 + directionX * 10 < -width / 6 || x3 + directionX * 10 < -width / 6) {
                         directionX *= -1;
                     }
-                    if (y2 + directionY * 10 > height  || y3 + directionY * 10 > height ||
+                    if (y2 + directionY * 10 > height || y3 + directionY * 10 > height ||
                             y3 + directionY * 10 < -height / 2 + size || y4 + directionY * 10 < -height / 2 + size) {
                         directionY *= -1;
                     }
