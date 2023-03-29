@@ -184,6 +184,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mMediaPlayer.release();
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.start();
+        }
+        else{
+            mMediaPlayer = MediaPlayer.create(this, R.raw.mario);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.start();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mMediaPlayer != null) {
+            mMediaPlayer.start();
+        }
+        else{
+            mMediaPlayer = MediaPlayer.create(this, R.raw.mario);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.start();
+        }
+    }
+
     public void playSound(View view) {
         mMediaPlayer.start();
         int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
