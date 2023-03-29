@@ -166,25 +166,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View view) {
 
 
-
                 if (!botEnabled) {
                     botEnabled = true;
-                    botLevelHard=false;
+                    botLevelHard = false;
                     btnGameMode.setText("Easy Bot");
                     resetGame();
                     StartGame = "X";
                     playerTurn.setImageResource(R.drawable.x);
                 } else {
-                    if(!botLevelHard){
+                    if (!botLevelHard) {
                         btnGameMode.setText("Hard Bot");
-                        botLevelHard=true;
+                        botLevelHard = true;
                         resetGame();
                         StartGame = "X";
                         playerTurn.setImageResource(R.drawable.x);
-                    }
-                    else{
+                    } else {
                         btnGameMode.setText("2 Players");
-                        botLevelHard=false;
+                        botLevelHard = false;
                         botEnabled = false;
                         resetGame();
                     }
@@ -218,40 +216,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-/*
-//Récupérer le bouton bascule pour le son
-        mSoundToggle = findViewById(R.id.sound_toggle);
-
-        // Créer un objet MediaPlayer pour jouer l'audio
-        mMediaPlayer = MediaPlayer.create(this, R.raw.mario);
-        // Désactiver la boucle (par défaut, MediaPlayer boucle l'audio)
-        mMediaPlayer.start();
-        mMediaPlayer.setLooping(true);
-// Ajouter un écouteur de clic au bouton bascule pour le son
-        mSoundToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mSoundToggle.isChecked()) {
-                        mMediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.mario);
-
-                    // Activer le son
-                    mMediaPlayer.setLooping(true);
-                    mMediaPlayer.start();
-                } else {
-                    if (mMediaPlayer != null) {
-                        mMediaPlayer.stop();
-                        mMediaPlayer.release();
-                    }
-                }*//*
-                if (mMediaPlayer.isPlaying()) {
-                    mMediaPlayer.pause();
-                } else {
-                    mMediaPlayer.start();
-                }*//*
-            }
-        });*/
-
-
     }
 
     // Arrêter l'audio lors de la fermeture de l'activité
@@ -474,8 +438,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         } //botenabled
-         else if(botEnabled && !botLevelHard){
-           // Toast.makeText(getApplicationContext(),"(botEnabled && !botLevelHard) : "+(botEnabled && !botLevelHard),Toast.LENGTH_LONG).show();
+        else if (botEnabled && !botLevelHard) {
+            // Toast.makeText(getApplicationContext(),"(botEnabled && !botLevelHard) : "+(botEnabled && !botLevelHard),Toast.LENGTH_LONG).show();
             if (!StartGame.equals("X")) {
 
                 StartGame = "X";
@@ -497,7 +461,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     // mCases[i].setImageResource(R.drawable.picx);
                     arr[i] = 1;
                     i++;
-                    if(!winningGame()){
+                    if (!winningGame()) {
 
 
                         for (int j = 0; j < 9; j++) {
@@ -518,13 +482,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mCases[index].setClickable(false);
                         // mCases[i].setImageResource(R.drawable.circle);
                         arr[index] = 2;
-        }
+                    }
                 }
                 winningGame();
             }
-         }
-        else
-        {
+        } else {
 
             if (!StartGame.equals("X")) {
 
@@ -553,30 +515,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         for (int j = 0; j < 9; j++) {
                             mCases[j].clearAnimation(); // Stopper l'animation en cours sur chaque ImageView
                         }
-                         /*// Le bot est activé, donc il joue automatiquement un coup aléatoire
-                         int index = new Random().nextInt(9);
-                         while (arr[index] != 0) {
-                             index = new Random().nextInt(9);
-                         }
-                         Bitmap oBitmap = createOBitmap(100, 100, 40, Color.RED);
-                         mCases[index].setImageBitmap(oBitmap);
-
-                         //ajouter une animation
-                         animation = getAnimation(index % 3);
-                         animation.setRepeatCount(Animation.INFINITE);
-                         mCases[index].startAnimation(animation);
-                         mCases[index].setClickable(false);
-                         // mCases[i].setImageResource(R.drawable.circle);
-                         arr[index] = 2;*/
-                        // Trouver les coups possibles pour le bot
                         List<Integer> coupsPossibles = new ArrayList<>();
                         for (int x = 0; x < 9; x++) {
                             if (arr[x] == 0) {
                                 coupsPossibles.add(x);
                             }
                         }
-
-// Parcourir chaque ligne, colonne et diagonale pour trouver les coups du joueur
+                        // Parcourir chaque ligne, colonne et diagonale pour trouver les coups du joueur
                         int[][] lignes = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}};
                         int[][] colonnes = {{0, 3, 6}, {1, 4, 7}, {2, 5, 8}};
                         int[][] diagonales = {{0, 4, 8}, {2, 4, 6}};
@@ -614,7 +559,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 animation = getAnimation(indexRestant % 3);
                                 animation.setRepeatCount(Animation.INFINITE);
                                 mCases[indexRestant].startAnimation(animation);
-                                mCases[indexRestant].setClickable(false);;
+                                mCases[indexRestant].setClickable(false);
+                                ;
                                 winningGame();
                                 return;
                             }
@@ -702,8 +648,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                             coupsPossibles.remove(Integer.valueOf(indexRestant));
                         }
-
-// Si le joueur n'a pas deux coups alignés, le bot joue un coup aléatoire parmi les coups possibles
+                        // Si le joueur n'a pas deux coups alignés, le bot joue un coup aléatoire parmi les coups possibles
                         if (!coupsPossibles.isEmpty()) {
                             int index = new Random().nextInt(coupsPossibles.size());
                             int coup = coupsPossibles.get(index);
@@ -731,8 +676,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     return;
                                 }
                             }
-
-// Jouer un coup aléatoire
+                            // Jouer un coup aléatoire
                             mCases[coup].setImageBitmap(oBitmap);
                             arr[coup] = 2;
                             animation = getAnimation(coup % 3);
