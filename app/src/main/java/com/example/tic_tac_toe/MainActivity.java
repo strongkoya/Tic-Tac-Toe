@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String StartGame = "X";
     int[] arr = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    int[][]  winningLines = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
     int i;
     int countX, countO, countD;
 
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView playerTurn;
     ImageView[] mCases;
     private boolean botEnabled = false;
-    private boolean botLevelHard = false;
+    private int botLevelHard = 1;
     private SeekBar mVolumeSeekBar;
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
@@ -168,21 +169,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (!botEnabled) {
                     botEnabled = true;
-                    botLevelHard = false;
+                    botLevelHard = 1;
                     btnGameMode.setText("Easy Bot");
                     resetGame();
                     StartGame = "X";
                     playerTurn.setImageResource(R.drawable.x);
                 } else {
-                    if (!botLevelHard) {
-                        btnGameMode.setText("Hard Bot");
-                        botLevelHard = true;
+                    if (botLevelHard==1) {
+                        btnGameMode.setText("Medium Bot");
+                        botLevelHard = 2;
                         resetGame();
                         StartGame = "X";
                         playerTurn.setImageResource(R.drawable.x);
-                    } else {
+                    } else if (botLevelHard==2){
+                        btnGameMode.setText("Hard Bot");
+                        botLevelHard = 3;
+                        resetGame();
+                    } else if (botLevelHard==3){
                         btnGameMode.setText("2 Players");
-                        botLevelHard = false;
+                        botLevelHard = 1;
                         botEnabled = false;
                         resetGame();
                     }
@@ -285,8 +290,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             playerTurn.setImageResource(R.drawable.x);
         }
     }
-
-    public Boolean winningGame() {
+// l'ancien winningGame()
+    /*public Boolean winningGame() {
         if ((arr[0] == 1 && arr[1] == 1 && arr[2] == 1) || (arr[3] == 1 && arr[4] == 1 && arr[5] == 1) || (arr[6] == 1 && arr[7] == 1 && arr[8] == 1) || (arr[0] == 1 && arr[3] == 1 && arr[6] == 1) || (arr[1] == 1 && arr[4] == 1 && arr[7] == 1) || (arr[2] == 1 && arr[5] == 1 && arr[8] == 1) || (arr[0] == 1 && arr[4] == 1 && arr[8] == 1) || (arr[2] == 1 && arr[4] == 1 && arr[6] == 1)) {
 
             AlertFragment alertFragment = new AlertFragment("Player X Wins", 1);
@@ -367,8 +372,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return false;
-    }
+    }*/
 
+    public Boolean winningGame() {
+        for (int i = 0; i < winningLines.length; i++) {
+            int[] line = winningLines[i];
+            if (arr[line[0]] == 1 && arr[line[1]] == 1 && arr[line[2]] == 1) {
+                AlertFragment alertFragment = new AlertFragment("Player X Wins", 1);
+                alertFragment.setPositiveButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resetGame();
+                    }
+                });
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        alertFragment.setCancelable(false);
+                        alertFragment.show(fragmentManager, "AlertFragment");
+                    }
+                }, 3000);
+
+                endGame();
+                countX++;
+                txt1.setText(String.valueOf(countX));
+                return true;
+            } else if (arr[line[0]] == 2 && arr[line[1]] == 2 && arr[line[2]] == 2) {
+                AlertFragment alertFragment = new AlertFragment("Player O Wins", 2);
+                alertFragment.setPositiveButton(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        resetGame();
+                    }
+                });
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        alertFragment.setCancelable(false);
+                        alertFragment.show(fragmentManager, "AlertFragment");
+                    }
+                }, 3000);
+
+                endGame();
+                countO++;
+                txt2.setText(String.valueOf(countO));
+                return true;
+            }
+        }
+        if (arr[0] != 0 && arr[1] != 0 && arr[2] != 0 && arr[3] != 0 && arr[4] != 0 && arr[5] != 0 && arr[6] != 0 && arr[7] != 0 && arr[8] != 0) {
+            AlertFragment alertFragment = new AlertFragment("The Game is Draw !!!", 1);
+            alertFragment.setPositiveButton(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    resetGame();
+                }
+            });
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    alertFragment.setCancelable(false);
+                    alertFragment.show(fragmentManager, "AlertFragment");
+                }
+            }, 3000);
+
+            endGame();
+            countD++;
+            txt3.setText(String.valueOf(countD));
+            return true;
+        }
+        return false;
+    }
     public void resetGame() {
         for (int i = 0; i < arr.length; i++) {
             arr[i] = 0;
@@ -438,7 +514,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         } //botenabled
-        else if (botEnabled && !botLevelHard) {
+        else if (botEnabled && botLevelHard==1) {
             // Toast.makeText(getApplicationContext(),"(botEnabled && !botLevelHard) : "+(botEnabled && !botLevelHard),Toast.LENGTH_LONG).show();
             if (!StartGame.equals("X")) {
 
@@ -467,7 +543,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         for (int j = 0; j < 9; j++) {
                             mCases[j].clearAnimation(); // Stopper l'animation en cours sur chaque ImageView
                         }
-                        // Le bot est activé, donc il joue automatiquement un coup aléatoire
+                        /*// Le bot est activé, donc il joue automatiquement un coup aléatoire
                         int index = new Random().nextInt(9);
                         while (arr[index] != 0) {
                             index = new Random().nextInt(9);
@@ -481,14 +557,156 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mCases[index].startAnimation(animation);
                         mCases[index].setClickable(false);
                         // mCases[i].setImageResource(R.drawable.circle);
-                        arr[index] = 2;
+                        arr[index] = 2;*/
+                        List<Integer> coupsPossibles = new ArrayList<>();
+                        for (int x = 0; x < 9; x++) {
+                            if (arr[x] == 0) {
+                                coupsPossibles.add(x);
+                            }
+                        }
+                        int randomIndex = (int) (Math.random() * coupsPossibles.size());
+                        int randomMove = coupsPossibles.get(randomIndex);
+                        playMove(randomMove, Color.RED);
                     }
                 }
                 winningGame();
             }
-        } else {
+        } else if (botEnabled && botLevelHard==2) {
 
             if (!StartGame.equals("X")) {
+
+                StartGame = "X";
+                playerTurn.setImageResource(R.drawable.x);
+            }
+
+            for (int i = 0; i < 9; i++) {
+                if (mCases[i] == view) {
+
+                    //  Bitmap xBitmap = createXBitmap(100, 100, Color.BLUE);
+                    Bitmap xBitmap = createXBitmap(100, 100, Color.BLUE, Color.CYAN);
+                    mCases[i].setImageBitmap(xBitmap);
+                    //ajouter une animation
+                    Animation animation = getAnimation(i % 3);
+                    animation.setRepeatCount(Animation.INFINITE);
+                    mCases[i].startAnimation(animation);
+                    mCases[i].setClickable(false);
+                    // mCases[i].setImageResource(R.drawable.picx);
+                    arr[i] = 1;
+                    i++;
+                    if (!winningGame()) {
+
+
+                        for (int j = 0; j < 9; j++) {
+                            mCases[j].clearAnimation(); // Stopper l'animation en cours sur chaque ImageView
+                        }
+
+                        boolean played = false;
+
+
+                        // Chercher s'il y a un coup bloquant
+                        if (!played) {
+                            int blockingMove = findWinningMove(arr, 1);
+                            if (blockingMove != -1) {
+                                playMove(blockingMove, Color.RED);
+                                played = true;
+                            }
+                        }
+
+                        // Jouer un coup aléatoire
+                        if (!played) {
+                            List<Integer> coupsPossibles = new ArrayList<>();
+                            for (int x = 0; x < 9; x++) {
+                                if (arr[x] == 0) {
+                                    coupsPossibles.add(x);
+                                }
+                            }
+                            int randomIndex = (int) (Math.random() * coupsPossibles.size());
+                            int randomMove = coupsPossibles.get(randomIndex);
+                            playMove(randomMove, Color.RED);
+                        }
+
+                        winningGame();
+                        return;
+                    }}
+            }
+
+
+
+        }
+
+
+        else if (botEnabled && botLevelHard==3){
+
+
+
+            if (!StartGame.equals("X")) {
+
+                StartGame = "X";
+                playerTurn.setImageResource(R.drawable.x);
+            }
+
+            for (int i = 0; i < 9; i++) {
+                if (mCases[i] == view) {
+
+                    //  Bitmap xBitmap = createXBitmap(100, 100, Color.BLUE);
+                    Bitmap xBitmap = createXBitmap(100, 100, Color.BLUE, Color.CYAN);
+                    mCases[i].setImageBitmap(xBitmap);
+                    //ajouter une animation
+                    Animation animation = getAnimation(i % 3);
+                    animation.setRepeatCount(Animation.INFINITE);
+                    mCases[i].startAnimation(animation);
+                    mCases[i].setClickable(false);
+                    // mCases[i].setImageResource(R.drawable.picx);
+                    arr[i] = 1;
+                    i++;
+                    if (!winningGame()) {
+
+
+                        for (int j = 0; j < 9; j++) {
+                            mCases[j].clearAnimation(); // Stopper l'animation en cours sur chaque ImageView
+                        }
+                    // Chercher s'il y a un coup gagnant
+                    boolean played = false;
+                    int winningMove = findWinningMove(arr, 2);
+                    if (winningMove != -1) {
+                        playMove(winningMove, Color.RED);
+                        played = true;
+                    }
+
+                    // Chercher s'il y a un coup bloquant
+                    if (!played) {
+                        int blockingMove = findWinningMove(arr, 1);
+                        if (blockingMove != -1) {
+                            playMove(blockingMove, Color.RED);
+                            played = true;
+                        }
+                    }
+
+                    // Jouer le coup arr[4]
+                    if (!played && arr[4] == 0) {
+                        playMove(4, Color.RED);
+                        played = true;
+                    }
+
+                    // Jouer un coup aléatoire
+                    if (!played) {
+                        List<Integer> coupsPossibles = new ArrayList<>();
+                        for (int x = 0; x < 9; x++) {
+                            if (arr[x] == 0) {
+                                coupsPossibles.add(x);
+                            }
+                        }
+                        int randomIndex = (int) (Math.random() * coupsPossibles.size());
+                        int randomMove = coupsPossibles.get(randomIndex);
+                        playMove(randomMove, Color.RED);
+                    }
+
+                    winningGame();
+                    return;
+                }}
+            }
+            // l'aancien code non optimisé quand il était deux niveaux de bot et ceci est le hard
+           /* if (!StartGame.equals("X")) {
 
                 StartGame = "X";
                 playerTurn.setImageResource(R.drawable.x);
@@ -691,8 +909,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 winningGame();
+            }*/
+        }
+    }
+
+    private int findWinningMove(int[] arr, int player) {
+
+        for (int[] line : winningLines) {
+            int count = 0;
+            int emptyIndex = -1;
+            for (int index : line) {
+                if (arr[index] == player) {
+                    count++;
+                } else if (arr[index] == 0) {
+                    emptyIndex = index;
+                }
+            }
+            if (count == 2 && emptyIndex != -1) {
+                return emptyIndex;
             }
         }
+        return -1;
+    }
+
+    private void playMove(int index, int color) {
+        Bitmap bitmap = createOBitmap(100, 100, 40, color);
+        mCases[index].setImageBitmap(bitmap);
+        Animation animation = getAnimation(index % 3);
+        animation.setRepeatCount(Animation.INFINITE);
+        mCases[index].startAnimation(animation);
+        mCases[index].setClickable(false);
+        arr[index] = 2;
     }
 
     private Animation getAnimation(int animationType) {
