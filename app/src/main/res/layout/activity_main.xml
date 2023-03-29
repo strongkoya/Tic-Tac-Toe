@@ -60,7 +60,7 @@
             android:backgroundTint="#AA3D3D"
             android:padding="15dp"
             android:shadowRadius="@integer/material_motion_duration_long_2"
-            android:text="BOT/2-players"
+            android:text="2 players"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
