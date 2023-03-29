@@ -475,7 +475,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } //botenabled
          else if(botEnabled && !botLevelHard){
-            Toast.makeText(getApplicationContext(),"(botEnabled && !botLevelHard) : "+(botEnabled && !botLevelHard),Toast.LENGTH_LONG).show();
+           // Toast.makeText(getApplicationContext(),"(botEnabled && !botLevelHard) : "+(botEnabled && !botLevelHard),Toast.LENGTH_LONG).show();
             if (!StartGame.equals("X")) {
 
                 StartGame = "X";
