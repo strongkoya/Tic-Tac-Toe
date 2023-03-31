@@ -16,9 +16,10 @@ import android.widget.RelativeLayout;
         import android.widget.RelativeLayout;
         import android.widget.Toast;
 
-public class GrilleJeuCustomView extends RelativeLayout implements View.OnClickListener {
+public class GrilleJeuCustomView extends RelativeLayout  {
 
     private ImageView[] mCases;
+    private RelativeLayout[] winnerCrossedLines;
 
     public GrilleJeuCustomView(Context context) {
         super(context);
@@ -50,36 +51,26 @@ public class GrilleJeuCustomView extends RelativeLayout implements View.OnClickL
         mCases[7] = findViewById(R.id.btn8);
         mCases[8] = findViewById(R.id.btn9);
 
-        for (ImageView mCase : mCases) {
-            mCase.setOnClickListener(this);
-        }
+        winnerCrossedLines = new RelativeLayout[9];
+
+        winnerCrossedLines[0] = findViewById(R.id.winnerLine0);
+        winnerCrossedLines[1] = findViewById(R.id.winnerLine1);
+        winnerCrossedLines[2] = findViewById(R.id.winnerLine2);
+        winnerCrossedLines[3] = findViewById(R.id.winnerLine3);
+        winnerCrossedLines[4] = findViewById(R.id.winnerLine4);
+        winnerCrossedLines[5] = findViewById(R.id.winnerLine5);
+        winnerCrossedLines[6] = findViewById(R.id.winnerLine6);
+        winnerCrossedLines[7] = findViewById(R.id.winnerLine7);
+
+
     }
 
-    @Override
-    public void onClick(View view) {
-        /*ImageView caseCliquee = (ImageView) view;
-        int caseCliqueeIndex = -1;
-        for (int i = 0; i < 9; i++) {
-            if (mCases[i] == caseCliquee) {
-                Toast.makeText(getContext(),"helllo",Toast.LENGTH_LONG).show();
-                caseCliqueeIndex = i;
-                break;
-            }
-        }
 
-        if (caseCliqueeIndex != -1) {
-            if (mCurrentPlayer == 1) {
-                caseCliquee.setImageResource(mImages[1]);
-                mCurrentPlayer = 2;
-            } else {
-                caseCliquee.setImageResource(mImages[2]);
-                mCurrentPlayer = 1;
-            }
-        }*/
-    }
 
     public ImageView[] getmCases() {
         return mCases;
     }
+    
+    public RelativeLayout[] getWinningLine() {return winnerCrossedLines;}
 }
 

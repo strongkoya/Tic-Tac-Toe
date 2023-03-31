@@ -20,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
     private ToggleButton mSoundToggle;
+     RelativeLayout[] winnerCrossedLines;
 
 //x=1
 //y=2
@@ -128,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         LinearLayout linearLayoutScore = findViewById(R.id.LLScore);
+
+        winnerCrossedLines = grilleJeuCustomView.getWinningLine();
 
 
         btnreset = findViewById(R.id.btnreset);
@@ -378,6 +382,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < winningLines.length; i++) {
             int[] line = winningLines[i];
             if (arr[line[0]] == 1 && arr[line[1]] == 1 && arr[line[2]] == 1) {
+              //  winnerLine1.setVisibility(View.VISIBLE);
+                winnerCrossedLines[i].setVisibility(View.VISIBLE);
                 AlertFragment alertFragment = new AlertFragment("Player X Wins", 1);
                 alertFragment.setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
@@ -399,6 +405,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txt1.setText(String.valueOf(countX));
                 return true;
             } else if (arr[line[0]] == 2 && arr[line[1]] == 2 && arr[line[2]] == 2) {
+                winnerCrossedLines[i].setVisibility(View.VISIBLE);
                 AlertFragment alertFragment = new AlertFragment("Player O Wins", 2);
                 alertFragment.setPositiveButton(new DialogInterface.OnClickListener() {
                     @Override
@@ -453,6 +460,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             mCases[j].setImageDrawable(null);
             mCases[j].setClickable(true);
+
+        }
+        for (int x = 0; x < 8; x++) {
+
+            winnerCrossedLines[x].setVisibility(View.INVISIBLE);
+
 
         }
         btnreset.setClickable(true);
