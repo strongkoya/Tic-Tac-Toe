@@ -121,6 +121,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Empêche l'écran de se mettre en veille
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // Masque les boutons de navigation pour un affichage plein écran
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
         GrilleJeuCustomView grilleJeuCustomView = findViewById(R.id.grilleJeu);
         mCases = grilleJeuCustomView.getmCases();
 
