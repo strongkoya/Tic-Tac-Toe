@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mVolumeSeekBar = findViewById(R.id.volumeSeekBar);
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        mMediaPlayer = MediaPlayer.create(this, R.raw.mario);
+        mMediaPlayer = MediaPlayer.create(this, R.raw.instru);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
         int maxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mMediaPlayer != null) {
             mMediaPlayer.start();
         } else {
-            mMediaPlayer = MediaPlayer.create(this, R.raw.mario);
+            mMediaPlayer = MediaPlayer.create(this, R.raw.instru);
             mMediaPlayer.setLooping(true);
             mMediaPlayer.start();
         }
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mMediaPlayer != null) {
             mMediaPlayer.start();
         } else {
-            mMediaPlayer = MediaPlayer.create(this, R.raw.mario);
+            mMediaPlayer = MediaPlayer.create(this, R.raw.instru);
             mMediaPlayer.setLooping(true);
             mMediaPlayer.start();
         }
